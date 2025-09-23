@@ -62,6 +62,8 @@ import dji.sdk.sdkmanager.DJISDKManager;
 import dji.sdk.sdkmanager.LDMModule;
 import dji.sdk.sdkmanager.LDMModuleType;
 import dji.sdk.useraccount.UserAccountManager;
+import dji.sdk.flightcontroller.FlightController;
+import dji.sdk.products.Aircraft;
 
 /**
  * Created by dji on 15/12/18.
@@ -198,10 +200,25 @@ public class MainContent extends RelativeLayout {
         mBtnMyProgram.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Launch my flight program
-                ToastUtils.setResultToToast("My Flight Program clicked!");
+                // Get the flight controller
+                if (DJISampleApplication.getProductInstance() == null) {
+                    ToastUtils.setResultToToast("No drone connected!");
+                    return;
+                }
+
+                Aircraft aircraft = (Aircraft) DJISampleApplication.getProductInstance();
+                if (aircraft.getFlightController() == null) {
+                    ToastUtils.setResultToToast("Flight controller not available!");
+                    return;
+                }
+
+                FlightController flightController = aircraft.getFlightController();
+
+                // Simple takeoff sequence
+                performTakeoffLandingSequence(flightController);
             }
         });
+
         mBtnOpen.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -721,4 +738,45 @@ public class MainContent extends RelativeLayout {
         DJISampleApplication.getEventBus().post(new MainActivity.ConnectivityChangeEvent());
     }
     //endregion
+
+    //FLIGHT INSTRUCTIONS
+    private void performTakeoffLandingSequence(FlightController flightController) {
+        ToastUtils.setResultToToast("Starting takeoff...");
+
+        // Start takeoff
+        flightController.startTakeoff(new CommonCallbacks.CompletionCallback() {
+            @Override
+            public void onResult(DJIError djiError) {
+                if (djiError == null) {
+                    ToastUtils.setResultToToast("Takeoff successful! Landing in 5 seconds...");
+
+                    // Wait 5 seconds then land
+                    mHander.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            startLanding(flightController);
+                        }
+                    }, 5000);
+
+                } else {
+                    ToastUtils.setResultToToast("Takeoff failed: " + djiError.getDescription());
+                }
+            }
+        });
+    }
+
+    private void startLanding(FlightController flightController) {
+        ToastUtils.setResultToToast("Starting landing...");
+
+        flightController.startLanding(new CommonCallbacks.CompletionCallback() {
+            @Override
+            public void onResult(DJIError djiError) {
+                if (djiError == null) {
+                    ToastUtils.setResultToToast("Landing successful!");
+                } else {
+                    ToastUtils.setResultToToast("Landing failed: " + djiError.getDescription());
+                }
+            }
+        });
+    }
 }
