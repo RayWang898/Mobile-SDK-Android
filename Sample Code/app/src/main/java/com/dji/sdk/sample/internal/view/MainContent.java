@@ -88,7 +88,11 @@ public class MainContent extends RelativeLayout {
     private TextView mTextProduct;
     private TextView mTextModelAvailable;
     private Button mBtnRegisterApp;
-    private Button getmBtnRegisterAppForLDM;
+
+    //private Button getmBtnRegisterAppForLDM;
+
+    //this one here is my custom button
+    private Button mBtnMyProgram;
     private Button mBtnOpen;
     private Button mBtnBluetooth;
     private ViewWrapper componentList =
@@ -167,7 +171,8 @@ public class MainContent extends RelativeLayout {
         mTextModelAvailable = (TextView) findViewById(R.id.text_model_available);
         mTextProduct = (TextView) findViewById(R.id.text_product_info);
         mBtnRegisterApp = (Button) findViewById(R.id.btn_registerApp);
-        getmBtnRegisterAppForLDM = (Button) findViewById(R.id.btn_registerAppForLDM);
+//      getmBtnRegisterAppForLDM = (Button) findViewById(R.id.btn_registerAppForLDM);
+        mBtnMyProgram = (Button) findViewById(R.id.btn_my_program);
         mBtnOpen = (Button) findViewById(R.id.btn_open);
         mBridgeModeEditText = (EditText) findViewById(R.id.edittext_bridge_ip);
         mBtnBluetooth = (Button) findViewById(R.id.btn_bluetooth);
@@ -183,11 +188,18 @@ public class MainContent extends RelativeLayout {
                 checkAndRequestPermissions();
             }
         });
-        getmBtnRegisterAppForLDM.setOnClickListener(new OnClickListener() {
+//        getmBtnRegisterAppForLDM.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                isregisterForLDM = true;
+//                checkAndRequestPermissions();
+//            }
+//        });
+        mBtnMyProgram.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                isregisterForLDM = true;
-                checkAndRequestPermissions();
+                // TODO: Launch my flight program
+                ToastUtils.setResultToToast("My Flight Program clicked!");
             }
         });
         mBtnOpen.setOnClickListener(new OnClickListener() {

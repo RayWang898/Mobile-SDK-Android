@@ -100,15 +100,30 @@
         android:textColor="@color/common_text_color"
         android:textSize="15dp"/>
 
+    <!--this part allows the app to register without network connection-->
+<!--    <Button-->
+<!--        android:id="@+id/btn_registerAppForLDM"-->
+<!--        android:layout_width="150dp"-->
+<!--        android:layout_height="55dp"-->
+<!--        android:layout_below="@+id/btn_registerApp"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:background="@drawable/round_btn"-->
+<!--        android:text="Register APP for LDM"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textColor="@color/common_text_color"-->
+<!--        android:textSize="15dp"/>-->
+
+<!--this is my custom button, it runs all my special functions-->
     <Button
-        android:id="@+id/btn_registerAppForLDM"
+        android:id="@+id/btn_my_program"
         android:layout_width="150dp"
         android:layout_height="55dp"
         android:layout_below="@+id/btn_registerApp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:background="@drawable/round_btn"
-        android:text="Register APP for LDM"
+        android:text="My Flight Program"
         android:textAllCaps="false"
         android:textColor="@color/common_text_color"
         android:textSize="15dp"/>
@@ -117,7 +132,7 @@
         android:id="@+id/btn_open"
         android:layout_width="150dp"
         android:layout_height="55dp"
-        android:layout_below="@+id/btn_registerAppForLDM"
+        android:layout_below="@+id/btn_my_program"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:background="@drawable/round_btn"
@@ -125,6 +140,9 @@
         android:textAllCaps="false"
         android:textColor="@color/common_text_color"
         android:textSize="15dp"/>
+
+    <!--REMOVED        android:layout_below="@+id/btn_registerAppForLDM"-->
+
 
     <TextView
         android:id="@+id/text_version"
