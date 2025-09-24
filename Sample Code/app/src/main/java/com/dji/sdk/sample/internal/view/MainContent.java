@@ -1,8 +1,11 @@
 package com.dji.sdk.sample.internal.view;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -28,6 +31,7 @@ import android.widget.TextView;
 import com.dji.sdk.sample.R;
 import com.dji.sdk.sample.demo.bluetooth.BluetoothView;
 import com.dji.sdk.sample.internal.controller.DJISampleApplication;
+import com.dji.sdk.sample.internal.controller.HumanDetection;
 import com.dji.sdk.sample.internal.controller.MainActivity;
 import com.dji.sdk.sample.internal.model.ViewWrapper;
 import com.dji.sdk.sample.internal.utils.DialogUtils;
@@ -195,13 +199,21 @@ public class MainContent extends RelativeLayout {
 //                checkAndRequestPermissions();
 //            }
 //        });
-        mBtnMyProgram.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: Launch my flight program
-                ToastUtils.setResultToToast("My Flight Program clicked!");
-            }
+//        mBtnMyProgram.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // TODO: Launch my flight program
+//                ToastUtils.setResultToToast("My Flight Program clicked!");
+//            }
+//        });
+
+        mBtnMyProgram.setOnClickListener(v -> {
+            Context context = v.getContext();
+            Intent intent = new Intent(context, HumanDetection.class);
+            context.startActivity(intent);
         });
+
+
         mBtnOpen.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
